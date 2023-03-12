@@ -1,7 +1,7 @@
 <template>
   <HeaderView :totalIncome="this.state.totalIncome" />
-  <FormView  @add-income="this.AddIncome"/>
-  <IncomeList :state="state"/>
+  <FormView @add-income="this.AddIncome" />
+  <IncomeList :state="state" />
 </template>
 
 <script>
@@ -25,14 +25,34 @@ export default {
           }
 
           return temp
+        }),
+        sortedIncome: computed(() => {
+          let temp = []
+
+          temp = this.state.income.sort(function (a, b) {
+            return b.date - a.date
+          })
+
+          return temp
         })
       }
     }
   },
+  // computed: {
+  //   sortedIncome(){
+  //     let temp = []
+
+  //     temp = this.state.income.sort(function(a,b) {
+  //       return b.date - a.date
+  //     })
+
+  //     return temp
+  //   }
+  // },
   components: { HeaderView, FormView, IncomeList },
 
   methods: {
-    AddIncome(data){
+    AddIncome(data) {
       // Date format
       let d = data.date.split("-");
       let newD = new Date(d[0], d[1], d[2])
@@ -43,7 +63,7 @@ export default {
         value: data.value,
         date: newD.getTime()
       }]
-      
+
       console.log(this.state.income)
     }
   }

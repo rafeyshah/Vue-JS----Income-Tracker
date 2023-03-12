@@ -15,9 +15,9 @@ export default {
     methods:{
         FormattedDate(){
             let date = new Date (this.income.date)
-            let day = date.getDay()
+            let day = date.getDate()
             let month = date.getMonth()
-            let year = date.getYear()
+            let year = date.getFullYear()
             return day + "/" + month + "/" + year
         }
     }
