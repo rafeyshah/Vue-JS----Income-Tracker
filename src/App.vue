@@ -1,23 +1,20 @@
 <template>
   <HeaderView :totalIncome="this.state.totalIncome" />
-  <FormView @add-income="this.AddIncome"/>
+  <FormView  @add-income="this.AddIncome"/>
+  <IncomeList :state="state"/>
 </template>
 
 <script>
 import { computed } from 'vue';
 import HeaderView from './components/HeaderView.vue'
 import FormView from './components/FormView.vue'
+import IncomeList from './components/IncomeList.vue'
 export default {
   name: "App",
   data() {
     return {
       state: {
-        income: [{
-          value: 400
-        },
-        {
-          value: 500
-        }],
+        income: [],
         totalIncome: computed(() => {
           let temp = 0
 
@@ -32,12 +29,11 @@ export default {
       }
     }
   },
-  components: { HeaderView, FormView },
+  components: { HeaderView, FormView, IncomeList },
 
   methods: {
     AddIncome(data){
       // Date format
-      console.log("fire")
       let d = data.date.split("-");
       let newD = new Date(d[0], d[1], d[2])
 
